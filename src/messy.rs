@@ -6,13 +6,9 @@ pub fn double_it(n:u32) -> u32 {
     n * 2
 }
 
-pub type BoxedF<A, B> = Box<Fn(A) -> B>;
+//pub type BoxedF<A, B> = Box<Fn(A) -> B>;
 
 pub type Gen<'a, T> = Rc<Box<Fn(Seed) -> T + 'a>>;
-
-//pub fn boxF<'a, A, B, F>(f:F) -> Box<Fn(A) -> B> where F : Fn(A) -> B + 'a {
-//    Box::new(f)
-//}
 
 pub fn gen<'a, F, T>(f: F) -> Gen<'a, T> where F: Fn(Seed) -> T + 'a {
     let boxed = Box::new(f);
