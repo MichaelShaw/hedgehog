@@ -1,4 +1,5 @@
 pub mod messy;
+pub mod tree;
 
 use std::num::Wrapping as w;
 

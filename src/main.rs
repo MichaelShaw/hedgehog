@@ -24,7 +24,7 @@ pub fn main() {
     println!("half  -> {:?}", gen_half(seed));
     println!("pair -> {:?}", gen_pair(seed));
 
-    let gen_to_point : Gen<_> = gen(|seed| {
+    let gen_to_point : Gen<_> = gen(|_| {
        |(a, b): (u32,u32)| Point { x: a, y: b }
     });
 
