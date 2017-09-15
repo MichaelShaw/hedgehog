@@ -1,26 +1,31 @@
 extern crate hedgehog;
 
-use hedgehog::messy::{Gen, self};
+use hedgehog::messy::*;
 use hedgehog::Seed;
 
 pub fn main() {
-    let six = messy::double_it(3);
-    println!("n -> {:?}", six);
 
-    let (seed, next_seed) = Seed::new_unseeded().split();
-    let n = seed.u32();
+    let seed = Seed::new_unseeded();
 
-    println!("original seed -> {:?}", seed);
-    println!("n -> {:?}, new seed -> {:?}", n, next_seed);
+    let gen_u32: Gen<u32> = gen(|seed| seed.u32());
 
-    let bullshit : Box<Fn(u32) -> u32> = Box::new(|n| n);
+    let gen_half: Gen<u32> = map(&gen_u32, |n| n / 2);
 
-    let gen_u32 : Gen<u32> = messy::create_gen(|seed| seed.u32());
+    let gen_zero = ret(0);
 
-    let gen_half: Gen<u32> = messy::map(&gen_u32, |n| n / 2);
+    let gen_pair = flat_map(&gen_u32, |a| {
+        flat_map(&gen_u32, move|b| {
+            ret((a, b))
+        })
+    });
 
-    let crap = gen_u32(next_seed);
-    println!("crap -> {:?}", crap);
-    let half_crap = gen_half(next_seed);
-    println!("halved crap -> {:?}", half_crap);
+    println!("zero -> {:?}", gen_zero(seed));
+    println!("n -> {:?}", gen_u32(seed));
+    println!("half  -> {:?}", gen_half(seed));
+    println!("pair -> {:?}", gen_pair(seed));
+
 }
+
+
+
+
