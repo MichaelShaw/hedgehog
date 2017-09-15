@@ -41,19 +41,4 @@ impl Seed {
     pub fn u32(&self) -> u32 { // could always make this consume it to be ""careful"" (would have to remove copying)
         self.w.0
     }
-
-//    pub fn next_u32(&self) -> (u32, Seed) {
-//        let x = self.x;
-//        let t = x ^ (x << 11);
-//        let w_ = self.w;
-//
-//        let next_seed = Seed {
-//            x: self.y,
-//            y: self.z,
-//            z: self.w,
-//            w: w_ ^ (w_ >> 19) ^ (t ^ (t >> 8)),
-//        };
-//
-//        (next_seed.w.0, next_seed)
-//    }
 }

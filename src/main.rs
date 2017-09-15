@@ -24,7 +24,18 @@ pub fn main() {
     println!("half  -> {:?}", gen_half(seed));
     println!("pair -> {:?}", gen_pair(seed));
 
+    let gen_to_point : Gen<_> = gen(|seed| {
+       |(a, b): (u32,u32)| Point { x: a, y: b }
+    });
+
+    let gen_point = apb(&gen_to_point, &gen_pair);
+
+    println!("point -> {:?}", gen_point(seed));
 }
+
+#[derive(Copy, Clone, Debug)]
+pub struct Point { x: u32, y: u32 }
+
 
 
 
