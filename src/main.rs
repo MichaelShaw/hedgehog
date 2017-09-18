@@ -3,7 +3,30 @@ extern crate hedgehog;
 use hedgehog::messy::*;
 use hedgehog::Seed;
 
+use hedgehog::tree::*;
+
+pub fn tree_stuff() {
+    println!("tree stuff");
+    let mut tree = Tree {
+        value : 2i32,
+        children: vec![Tree { value: 1, children: vec![] }]
+    };
+    println!("tree -> {:?}", tree);
+    let clj = |n:&i32| { n * 2 };
+    let doubled = tree.map(&clj);
+    println!("doubled -> {:?}", doubled);
+
+    let paired = tree.flat_map(&|a| {
+        let clj = |b:&i32| -> (i32, i32) { (*a, *b) };
+        tree.map(&clj)
+    });
+//
+    println!("paired ({:?})-> {:?} ", paired.len(), paired);
+}
+
 pub fn main() {
+    tree_stuff();
+    return;
 
     let seed = Seed::new_unseeded();
 
