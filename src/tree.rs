@@ -27,18 +27,16 @@ impl<A> Tree<A> where A : Debug {
         }
     }
 
-    #[recursion_limit="100"]
     pub fn map<F, B>(&self, f: &F) -> Tree<B> where F : Fn(&A) -> B {
-        println!("my value -> {:?} children count -> {:?}", self.value, self.children.len());
         let nv = f(&self.value);
 
-        let mapped_children : Vec<Tree<B>> = self.children.iter().map(|child| {
+        let new_children : Vec<Tree<B>> = self.children.iter().map(|child| {
             child.map(f)
         } ).collect();
 
         Tree {
             value: nv,
-            children: mapped_children, // mapped_children,
+            children: new_children,
         }
     }
 
