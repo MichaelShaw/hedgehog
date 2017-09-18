@@ -1,13 +1,11 @@
-//use std::rc::Rc;
 use std::ops::Deref;
+use std::fmt::Debug;
 
 #[derive(Clone, Debug)]
 pub struct Tree<T> {
     pub value: T,
     pub children: Vec<Tree<T>>,
 }
-
-use std::fmt::Debug;
 
 impl<A> Tree<A> where A : Debug {
     pub fn len(&self) -> usize {
