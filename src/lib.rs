@@ -1,6 +1,9 @@
 pub mod messy;
-pub mod tree;
 
+pub mod tree {
+    pub mod eager;
+    pub mod lazy;
+}
 
 use std::num::Wrapping as w;
 

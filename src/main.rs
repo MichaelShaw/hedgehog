@@ -3,7 +3,7 @@ extern crate hedgehog;
 use hedgehog::messy::*;
 use hedgehog::Seed;
 
-use hedgehog::tree::*;
+use hedgehog::tree::eager::*;
 
 pub fn tree_stuff() {
     println!("tree stuff");
